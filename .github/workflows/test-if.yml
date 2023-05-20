@@ -8,8 +8,23 @@ jobs:
   test-if:
     runs-on: ubuntu-latest
     steps:
-      - name: The condition is true
+      - name: pipe without escape
         if: |
           github.actor == 'radusuciu' &&
           github.event_name == 'push'
-        run: echo "if newline with | syntax works!"
+        run: echo "if newline with | syntax works with escape"
+      - name: pipe with escape
+        if: |
+          github.actor == 'radusuciu' && \
+          github.event_name == 'push'
+        run: echo "!!! it needs an escape !!!"
+      - name: control for pipe without escape
+        if: |
+          github.actor == 'notradusuciu' &&
+          github.event_name == 'push'
+        run: echo "if newline with | syntax works with escape"
+      - name: control for pipe with escape
+        if: |
+          github.actor == 'notradusuciu' && \
+          github.event_name == 'push'
+        run: echo "!!! it needs an escape !!!"

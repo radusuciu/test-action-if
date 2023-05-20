@@ -13,6 +13,11 @@ jobs:
           github.actor == 'radusuciu' &&
           github.event_name == 'push'
         run: echo "if newline with | syntax works with escape"
+      - name: test startswith
+        if: |
+          startsWith('radu', github.actor) &&
+          github.event_name == 'push'
+        run: echo "startswith works"
       - name: control for pipe without escape
         if: |
           github.actor == 'notradusuciu' &&
